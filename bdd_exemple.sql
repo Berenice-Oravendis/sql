@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS `ressources` (
     `active` BOOLEAN NOT NULL DEFAULT 1,
     `date_creation` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`auteur_email`) REFERENCES utilisateurs(`email`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    FOREIGN KEY (`auteur_email`) REFERENCES `utilisateurs`(`email`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- Insertion des ressources RH
