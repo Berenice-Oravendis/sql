@@ -13,12 +13,13 @@ CREATE TABLE IF NOT EXISTS `ressources` (
     `titre` VARCHAR(128) NOT NULL,
     `contenu` TEXT NOT NULL,
     `categorie` VARCHAR(64) NOT NULL,
-    `auteur_email` VARCHAR(255) NOT NULL,
+    `auteur_email` VARCHAR(200) NOT NULL,
     `active` BOOLEAN NOT NULL DEFAULT 1,
     `date_creation` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`auteur_email`) REFERENCES utilisateurs(`email`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- Insertion des ressources RH
 INSERT INTO `ressources` (`titre`, `contenu`, `categorie`, `auteur_email`, `active`) VALUES
