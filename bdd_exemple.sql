@@ -1,14 +1,15 @@
--- On utilise la base existante
 USE `bdd_extranetrh`;
 
--- Insertion des utilisateurs (collaborateurs)
-INSERT INTO `utilisateurs` (`prenom`, `email`, `age`, `mdp`, `Département`) VALUES
-('Angus', 'angus@oravendis.fr', 24, 'azerty123', 'Service e-learning'),
-('Ines', 'ines@oravendis.fr', 23, 'formation2025', 'Service e-learning'),
-('Adeline', 'adeline@oravendis.fr', 36, 'Com2025', 'service e-learning');
+-- 2. Préparation de la table utilisateurs (corriger si nécessaire)
+ALTER TABLE `utilisateurs`
+MODIFY `email` VARCHAR(200) NOT NULL,
+ADD UNIQUE (`email`);
 
--- Création de la table des ressources internes RH
-CREATE TABLE IF NOT EXISTS `ressources` (
+-- 3. Nettoyage
+DROP TABLE IF EXISTS `ressources`;
+
+-- 4. Création de la table des ressources RH
+CREATE TABLE `ressources` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `titre` VARCHAR(128) NOT NULL,
     `contenu` TEXT NOT NULL,
@@ -17,9 +18,11 @@ CREATE TABLE IF NOT EXISTS `ressources` (
     `active` BOOLEAN NOT NULL DEFAULT 1,
     `date_creation` DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`auteur_email`) REFERENCES `utilisateurs`(`email`) ON DELETE CASCADE
+    CONSTRAINT `fk_utilisateur_email` FOREIGN KEY (`auteur_email`) 
+        REFERENCES `utilisateurs`(`email`) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 -- Insertion des ressources RH
 INSERT INTO `ressources` (`titre`, `contenu`, `categorie`, `auteur_email`, `active`) VALUES
